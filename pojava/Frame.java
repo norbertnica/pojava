@@ -46,7 +46,7 @@ public class Frame extends JFrame {
 		pane.add(animation2,c);
 		c.gridx = 2;
 		c.ipadx = 80;
-		c.ipady = 500;
+		c.ipady = 400;
 		ToolPanel toolPanel = new ToolPanel();
 		toolPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),"Simulation parameters"));
 		pane.add(toolPanel,c);
