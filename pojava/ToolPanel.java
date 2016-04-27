@@ -5,6 +5,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -20,6 +22,7 @@ public class ToolPanel extends JPanel {
 		c.gridx = 0;
 		c.gridy = 0;
 		c.fill = GridBagConstraints.HORIZONTAL;
+		c.anchor = GridBagConstraints.NORTH;
 		c.gridwidth = 2;
 		add(fieldsLabel,c);
 		JLabel electricLabel = new JLabel("Electric field vector");
@@ -132,7 +135,32 @@ public class ToolPanel extends JPanel {
 		add(yFieldV,c);
 		c.gridy = 10;
 		add(zFieldV,c);
-		
+		JButton runButton = new JButton("Run");
+		JButton stopButton = new JButton("Stop");
+		JButton clearButton = new JButton("Clear all");
+		JLabel timeFields = new JLabel("Time-varying fields");
+		JLabel presets = new JLabel("Presets");
+		JComboBox timeCombo = new JComboBox();
+		JComboBox presetsCombo = new JComboBox();
+		c.gridwidth = 2;
+		c.gridy = 11;
+		c.gridx = 0;
+		add(timeFields,c);
+		c.gridx = 2;
+		add(presets,c);
+		c.gridx = 0;
+		c.gridy = 12;
+		add(timeCombo,c);
+		c.gridx = 2;
+		add(presetsCombo,c);
+		c.gridwidth = 1;
+		c.gridx = 0;
+		c.gridy = 13;
+		add(runButton,c);
+		c.gridx = 1;
+		add(stopButton,c);
+		c.gridx = 2;
+		add(clearButton,c);
 		
 		
 		
