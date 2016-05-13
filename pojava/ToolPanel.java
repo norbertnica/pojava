@@ -4,26 +4,61 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
 public class ToolPanel extends JPanel {
+	
+	public JTextField globalxFieldE;
+	public JTextField globalyFieldE;
+	public JTextField globalzFieldE;
+	public JTextField globalxFieldM;
+	public JTextField globalyFieldM;
+	public JTextField globalzFieldM;
+	public JTextField globalxFieldP;
+	public JTextField globalyFieldP;
+	public JTextField globalzFieldP;
+	public JTextField globalxFieldV;
+	public JTextField globalyFieldV;
+	public JTextField globalzFieldV;
+	public JTextField globalchargeField;
+	public JTextField globalmassField;
+	
+	public float xFieldEValue;
+	public float yFieldEValue;
+	public float zFieldEVaule;
+	public float xFieldMValue;
+	public float yFieldMValue;
+	public float zFieldMvalue;
+	public double xFieldPValue;
+	public double yFieldPValue;
+	public double zFieldPValue;
+	public float xFieldVValue;
+	public float yFieldVValue;
+	public float zFieldVValue;
+	public float chargeValue;
+	public float massValue;
+	public Frame globalFrame;
 
-	public ToolPanel() {
+	public ToolPanel(Frame frame) {
 		// TODO Auto-generated constructor stub
+		
+		globalFrame = frame;
 		GridBagLayout layout = new GridBagLayout();
 		GridBagConstraints c = new GridBagConstraints();
 		this.setLayout(layout);
 		JLabel fieldsLabel = new JLabel("Fields");
 		c.gridx = 0;
 		c.gridy = 0;
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.anchor = GridBagConstraints.NORTH;
 		c.gridwidth = 2;
+		c.anchor = GridBagConstraints.WEST;
+		c.fill = GridBagConstraints.HORIZONTAL;
 		add(fieldsLabel,c);
 		JLabel electricLabel = new JLabel("Electric field vector");
 		c.gridx = 0;
@@ -36,9 +71,9 @@ public class ToolPanel extends JPanel {
 		JLabel xLabelE = new JLabel("x");
 		JLabel yLabelE = new JLabel("y");
 		JLabel zLabelE = new JLabel("z");
-		JTextField xFieldE = new JTextField();
-		JTextField yFieldE = new JTextField();
-		JTextField zFieldE = new JTextField();
+		JTextField xFieldE = new JTextField("",7);
+		JTextField yFieldE = new JTextField("",7);
+		JTextField zFieldE = new JTextField("",7);
 		c.gridwidth = 1;
 		c.gridx = 0;
 		c.gridy = 2;
@@ -57,9 +92,9 @@ public class ToolPanel extends JPanel {
 		JLabel xLabelM = new JLabel("x");
 		JLabel yLabelM = new JLabel("y");
 		JLabel zLabelM = new JLabel("z");
-		JTextField xFieldM = new JTextField();
-		JTextField yFieldM = new JTextField();
-		JTextField zFieldM = new JTextField();
+		JTextField xFieldM = new JTextField("",7);
+		JTextField yFieldM = new JTextField("",7);
+		JTextField zFieldM = new JTextField("",7);
 		c.gridx = 2;
 		c.gridy= 2;
 		add(xLabelM,c);
@@ -76,7 +111,9 @@ public class ToolPanel extends JPanel {
 		add(zFieldM,c);
 		JLabel particle = new JLabel("Particle");
 		JLabel charge = new JLabel("Charge");
-		JTextField chargeField = new JTextField();
+		JLabel mass = new JLabel("Mass");
+		JTextField chargeField = new JTextField("",7);
+		JTextField massField = new JTextField("",7);
 		c.gridwidth = 2;
 		c.gridx = 0;
 		c.gridy = 5;
@@ -86,6 +123,10 @@ public class ToolPanel extends JPanel {
 		add(charge,c);
 		c.gridx = 1;
 		add(chargeField,c);
+		c.gridx = 2;
+		add(mass,c);
+		c.gridx = 3;
+		add(massField,c);
 		JLabel position = new JLabel("Initial position vector");
 		JLabel velocity = new JLabel("Initial velocity vector");
 		c.gridx = 0;
@@ -162,11 +203,62 @@ public class ToolPanel extends JPanel {
 		c.gridx = 2;
 		add(clearButton,c);
 		
+		globalxFieldE = xFieldE;
+		globalyFieldE = yFieldE;
+		globalzFieldE = zFieldE;
+		globalxFieldM = xFieldM;
+		globalyFieldM = yFieldM;
+		globalzFieldM = zFieldM;
+		globalxFieldP = xFieldP;
+		globalyFieldP = yFieldP;
+		globalzFieldP = zFieldP;
+		globalxFieldV = xFieldV;
+		globalyFieldV = yFieldV;
+		globalzFieldV = zFieldV;
+		globalchargeField = chargeField;
+		globalmassField = massField;
 		
 		
-		
-		
+		class RunButtonListener implements ActionListener{
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+				 xFieldEValue = Float.parseFloat(globalxFieldE.getText());
+				 yFieldEValue = Float.parseFloat(globalyFieldE.getText());
+				 zFieldEVaule = Float.parseFloat(globalzFieldE.getText());
+				 xFieldMValue = Float.parseFloat(globalxFieldM.getText());
+				 yFieldMValue = Float.parseFloat(globalyFieldM.getText());
+				 zFieldMvalue = Float.parseFloat(globalzFieldM.getText());
+				 xFieldPValue = Double.parseDouble(globalxFieldP.getText());
+				 yFieldPValue = Double.parseDouble(globalyFieldP.getText());
+				 zFieldPValue = Double.parseDouble(globalzFieldP.getText());
+				 xFieldVValue = Float.parseFloat(globalxFieldV.getText());
+				 yFieldVValue = Float.parseFloat(globalyFieldV.getText());
+				 zFieldVValue = Float.parseFloat(globalzFieldV.getText());
+				 chargeValue = Float.parseFloat(globalchargeField.getText());
+				 massValue = Float.parseFloat(globalmassField.getText());
+				 Molecule molecule = new Molecule();
+				 molecule.setElectricFieldX(xFieldEValue);
+				 molecule.setElectricFieldY(yFieldEValue);
+				 molecule.setElectricFieldZ(zFieldEVaule);
+				 molecule.setMagneticFieldX(xFieldMValue);
+				 molecule.setMagneticFieldY(yFieldMValue);
+				 molecule.setMagneticFieldZ(zFieldMvalue);
+				 molecule.setX(xFieldPValue);
+				 molecule.setY(yFieldPValue);
+				 molecule.setZ(zFieldPValue);
+				 molecule.SetSpeedX(xFieldVValue);
+				 molecule.SetSpeedY(yFieldVValue);
+				 molecule.SetSpeedZ(zFieldVValue);
+				 molecule.setMass(massValue);
+				 molecule.setCharge(chargeValue);
+				 globalFrame.startAnimation(molecule);
+			}
+			
+		}
+		RunButtonListener runButtonListener = new RunButtonListener();
+		runButton.addActionListener(runButtonListener);
 	}
-
-
 }
