@@ -80,6 +80,8 @@ public class Frame extends JFrame {
 				AnimationEngineZX animationzx = new AnimationEngineZX(molecule);
 				animationPanelyx.add(animationyx);
 				animationPanelzx.add(animationzx);
+				animationPanelyx.revalidate();
+				animationPanelzx.revalidate();
 				ExecutorService exec = Executors.newFixedThreadPool(2);
 				exec.execute(animationyx);
 				exec.execute(animationzx);
