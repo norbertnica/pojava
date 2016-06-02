@@ -7,46 +7,34 @@ import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import pojava.Frame.StopButtonListener;
 public class ToolPanel extends JPanel {
 	
-	public JTextField globalxFieldE;
-	public JTextField globalyFieldE;
-	public JTextField globalzFieldE;
-	public JTextField globalxFieldM;
-	public JTextField globalyFieldM;
-	public JTextField globalzFieldM;
-	public JTextField globalxFieldP;
-	public JTextField globalyFieldP;
-	public JTextField globalzFieldP;
-	public JTextField globalxFieldV;
-	public JTextField globalyFieldV;
-	public JTextField globalzFieldV;
-	public JTextField globalchargeField;
-	public JTextField globalmassField;
-	
-	public float xFieldEValue;
-	public float yFieldEValue;
-	public float zFieldEVaule;
-	public float xFieldMValue;
-	public float yFieldMValue;
-	public float zFieldMvalue;
-	public double xFieldPValue;
-	public double yFieldPValue;
-	public double zFieldPValue;
-	public float xFieldVValue;
-	public float yFieldVValue;
-	public float zFieldVValue;
-	public float chargeValue;
-	public float massValue;
+	public JTextField xFieldE;
+	public JTextField yFieldE;
+	public JTextField zFieldE;
+	public JTextField xFieldM;
+	public JTextField yFieldM;
+	public JTextField zFieldM;
+	public JTextField xFieldP;
+	public JTextField yFieldP;
+	public JTextField zFieldP;
+	public JTextField xFieldV;
+	public JTextField yFieldV;
+	public JTextField zFieldV;
+	public JTextField chargeField;
+	public JTextField massField;
 	public Frame globalFrame;
 
-	public ToolPanel(Frame frame) {
+	public ToolPanel(Frame frame, StopButtonListener x) {
 		// TODO Auto-generated constructor stub
 		
 		globalFrame = frame;
@@ -71,9 +59,9 @@ public class ToolPanel extends JPanel {
 		JLabel xLabelE = new JLabel("x");
 		JLabel yLabelE = new JLabel("y");
 		JLabel zLabelE = new JLabel("z");
-		JTextField xFieldE = new JTextField("",7);
-		JTextField yFieldE = new JTextField("",7);
-		JTextField zFieldE = new JTextField("",7);
+		xFieldE = new JTextField("",7);
+		yFieldE = new JTextField("",7);
+		zFieldE = new JTextField("",7);
 		c.gridwidth = 1;
 		c.gridx = 0;
 		c.gridy = 2;
@@ -92,9 +80,9 @@ public class ToolPanel extends JPanel {
 		JLabel xLabelM = new JLabel("x");
 		JLabel yLabelM = new JLabel("y");
 		JLabel zLabelM = new JLabel("z");
-		JTextField xFieldM = new JTextField("",7);
-		JTextField yFieldM = new JTextField("",7);
-		JTextField zFieldM = new JTextField("",7);
+		xFieldM = new JTextField("",7);
+		yFieldM = new JTextField("",7);
+		zFieldM = new JTextField("",7);
 		c.gridx = 2;
 		c.gridy= 2;
 		add(xLabelM,c);
@@ -112,8 +100,8 @@ public class ToolPanel extends JPanel {
 		JLabel particle = new JLabel("Particle");
 		JLabel charge = new JLabel("Charge");
 		JLabel mass = new JLabel("Mass");
-		JTextField chargeField = new JTextField("",7);
-		JTextField massField = new JTextField("",7);
+		chargeField = new JTextField("",7);
+		massField = new JTextField("",7);
 		c.gridwidth = 2;
 		c.gridx = 0;
 		c.gridy = 5;
@@ -146,9 +134,9 @@ public class ToolPanel extends JPanel {
 		add(yLabelP,c);
 		c.gridy = 10;
 		add(zLabelP,c);
-		JTextField xFieldP = new JTextField();
-		JTextField yFieldP = new JTextField();
-		JTextField zFieldP = new JTextField();
+		xFieldP = new JTextField();
+		yFieldP = new JTextField();
+		zFieldP = new JTextField();
 		c.gridx = 1;
 		c.gridy = 8;
 		add(xFieldP,c);
@@ -159,9 +147,9 @@ public class ToolPanel extends JPanel {
 		JLabel xLabelV = new JLabel("x");
 		JLabel yLabelV = new JLabel("y");
 		JLabel zLabelV = new JLabel("z");
-		JTextField xFieldV = new JTextField();
-		JTextField yFieldV = new JTextField();
-		JTextField zFieldV = new JTextField();
+		xFieldV = new JTextField();
+		yFieldV = new JTextField();
+		zFieldV = new JTextField();
 		c.gridx = 2;
 		c.gridy = 8;
 		add(xLabelV,c);
@@ -203,21 +191,6 @@ public class ToolPanel extends JPanel {
 		c.gridx = 2;
 		add(clearButton,c);
 		
-		globalxFieldE = xFieldE;
-		globalyFieldE = yFieldE;
-		globalzFieldE = zFieldE;
-		globalxFieldM = xFieldM;
-		globalyFieldM = yFieldM;
-		globalzFieldM = zFieldM;
-		globalxFieldP = xFieldP;
-		globalyFieldP = yFieldP;
-		globalzFieldP = zFieldP;
-		globalxFieldV = xFieldV;
-		globalyFieldV = yFieldV;
-		globalzFieldV = zFieldV;
-		globalchargeField = chargeField;
-		globalmassField = massField;
-		
 		
 		class RunButtonListener implements ActionListener{
 
@@ -225,40 +198,54 @@ public class ToolPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				
-				 xFieldEValue = Float.parseFloat(globalxFieldE.getText());
-				 yFieldEValue = Float.parseFloat(globalyFieldE.getText());
-				 zFieldEVaule = Float.parseFloat(globalzFieldE.getText());
-				 xFieldMValue = Float.parseFloat(globalxFieldM.getText());
-				 yFieldMValue = Float.parseFloat(globalyFieldM.getText());
-				 zFieldMvalue = Float.parseFloat(globalzFieldM.getText());
-				 xFieldPValue = Double.parseDouble(globalxFieldP.getText());
-				 yFieldPValue = Double.parseDouble(globalyFieldP.getText());
-				 zFieldPValue = Double.parseDouble(globalzFieldP.getText());
-				 xFieldVValue = Float.parseFloat(globalxFieldV.getText());
-				 yFieldVValue = Float.parseFloat(globalyFieldV.getText());
-				 zFieldVValue = Float.parseFloat(globalzFieldV.getText());
-				 chargeValue = Float.parseFloat(globalchargeField.getText());
-				 massValue = Float.parseFloat(globalmassField.getText());
 				 Molecule molecule = new Molecule();
-				 molecule.setElectricFieldX(xFieldEValue);
-				 molecule.setElectricFieldY(yFieldEValue);
-				 molecule.setElectricFieldZ(zFieldEVaule);
-				 molecule.setMagneticFieldX(xFieldMValue);
-				 molecule.setMagneticFieldY(yFieldMValue);
-				 molecule.setMagneticFieldZ(zFieldMvalue);
-				 molecule.setX(xFieldPValue);
-				 molecule.setY(yFieldPValue);
-				 molecule.setZ(zFieldPValue);
-				 molecule.SetSpeedX(xFieldVValue);
-				 molecule.SetSpeedY(yFieldVValue);
-				 molecule.SetSpeedZ(zFieldVValue);
-				 molecule.setMass(massValue);
-				 molecule.setCharge(chargeValue);
+				 molecule.setElectricFieldX(Float.parseFloat(xFieldE.getText()));
+				 molecule.setElectricFieldY(Float.parseFloat(yFieldE.getText()));
+				 molecule.setElectricFieldZ(Float.parseFloat(zFieldE.getText()));
+				 molecule.setMagneticFieldX(Float.parseFloat(xFieldM.getText()));
+				 molecule.setMagneticFieldY(Float.parseFloat(yFieldM.getText()));
+				 molecule.setMagneticFieldZ( Float.parseFloat(zFieldM.getText()));
+				 molecule.setX(Double.parseDouble(xFieldP.getText()));
+				 molecule.setY(Double.parseDouble(yFieldP.getText()));
+				 molecule.setZ(Double.parseDouble(zFieldP.getText()));
+				 molecule.SetSpeedX(Float.parseFloat(xFieldV.getText()));
+				 molecule.SetSpeedY(Float.parseFloat(yFieldV.getText()));
+				 molecule.SetSpeedZ(Float.parseFloat(zFieldV.getText()));
+				 molecule.setMass(Float.parseFloat(massField.getText()));
+				 molecule.setCharge(Float.parseFloat(chargeField.getText()));
 				 globalFrame.startAnimation(molecule);
 			}
 			
 		}
 		RunButtonListener runButtonListener = new RunButtonListener();
 		runButton.addActionListener(runButtonListener);
+		stopButton.addActionListener(x);
+		class ClearButtonListener implements ActionListener{
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+				xFieldE.setText(null);
+				yFieldE.setText(null);
+				zFieldE.setText(null);
+				xFieldM.setText(null);
+				yFieldM.setText(null);
+				zFieldM.setText(null);
+				xFieldP.setText(null);
+				yFieldP.setText(null);
+				zFieldP.setText(null);
+				xFieldV.setText(null);
+				yFieldV.setText(null);
+				zFieldV.setText(null);
+				chargeField.setText(null);
+				massField.setText(null);
+				
+			}
+		}
+		ClearButtonListener clearButtonListener = new ClearButtonListener();
+		clearButton.addActionListener(clearButtonListener);
+		
 	}
+	
 }

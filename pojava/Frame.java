@@ -8,6 +8,8 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -25,6 +27,17 @@ public class Frame extends JFrame {
 
 	public JPanel animationPanelyx;
 	public JPanel animationPanelzx;
+	public CalculationLoop calculationLoop;
+	public ExecutorService exec = Executors.newFixedThreadPool(1);
+	class StopButtonListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			
+			calculationLoop.stopAnimation();
+		}}
+	
 	/**
 	 * 
 	 */
@@ -45,7 +58,6 @@ public class Frame extends JFrame {
 		JPanel pane = new JPanel(layout);
 		add(pane);
 		JPanel animation1 = new JPanel();
-		
 		animation1.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),"XY plane animation"));
 		pane.add(animation1,c);
 		JPanel animation2 = new JPanel();
@@ -57,7 +69,8 @@ public class Frame extends JFrame {
 		c.ipady = 0;
 		animationPanelyx = animation1;
 		animationPanelzx = animation2;
-		ToolPanel toolPanel = new ToolPanel(this);
+		StopButtonListener stopButtonListener = new StopButtonListener();
+		ToolPanel toolPanel = new ToolPanel(this, stopButtonListener);
 		
 		toolPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),"Simulation parameters"));
 		pane.add(toolPanel,c);
@@ -76,21 +89,23 @@ public class Frame extends JFrame {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				AnimationEngineYX animationyx = new AnimationEngineYX(molecule);
-				AnimationEngineZX animationzx = new AnimationEngineZX(molecule);
-				animationPanelyx.add(animationyx);
-				animationPanelzx.add(animationzx);
+				animationPanelyx.removeAll();
+				animationPanelzx.removeAll();
+				XYPanel xyPanel = new XYPanel(molecule);
+				XZPanel xzPanel = new XZPanel(molecule);
+				animationPanelyx.add(xyPanel);
+				animationPanelzx.add(xzPanel);
+				calculationLoop = new CalculationLoop(molecule,xyPanel,xzPanel);
 				animationPanelyx.revalidate();
 				animationPanelzx.revalidate();
-				ExecutorService exec = Executors.newFixedThreadPool(2);
-				exec.execute(animationyx);
-				exec.execute(animationzx);
-				exec.shutdown();
+				exec.execute(calculationLoop);
+				
 			}
 			
 		});
 	}
 	
+		
 	}
 
 
