@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.Action;
 import javax.swing.JButton;
@@ -33,7 +34,7 @@ public class ToolPanel extends JPanel {
 	public JTextField chargeField;
 	public JTextField massField;
 	public Frame globalFrame;
-
+	public JComboBox presetsCombo;
 	public ToolPanel(Frame frame, StopButtonListener x) {
 		// TODO Auto-generated constructor stub
 		
@@ -169,8 +170,10 @@ public class ToolPanel extends JPanel {
 		JButton clearButton = new JButton("Clear all");
 		JLabel timeFields = new JLabel("Time-varying fields");
 		JLabel presets = new JLabel("Presets");
+		String[] presetChoices = {"Helical motion","Circular motion"};
 		JComboBox timeCombo = new JComboBox();
-		JComboBox presetsCombo = new JComboBox();
+		presetsCombo = new JComboBox(presetChoices);
+		presetsCombo.setSelectedItem(null);
 		c.gridwidth = 2;
 		c.gridy = 11;
 		c.gridx = 0;
@@ -246,6 +249,81 @@ public class ToolPanel extends JPanel {
 		ClearButtonListener clearButtonListener = new ClearButtonListener();
 		clearButton.addActionListener(clearButtonListener);
 		
+		class PresetsListener implements ActionListener{
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				String xFieldEText = "0";
+				String yFieldEText = "0";
+				String zFieldEText = "0";
+				String xFieldMText = "0";
+				String yFieldMText = "0";
+				String zFieldMText = "0";
+				String xFieldPText = "0";
+				String yFieldPText = "0";
+				String zFieldPText = "0";
+				String xFieldVText = "0";
+				String yFieldVText = "0";
+				String zFieldVText = "0";
+				String chargeFieldText = "1";
+				String massFieldText = "1";
+				if(presetsCombo.getSelectedIndex()==0){
+					xFieldEText = "0";
+					yFieldEText = "0";
+					zFieldEText = "0";
+					xFieldMText = "0";
+					yFieldMText = "0";
+					zFieldMText = "0";
+					xFieldPText = "0";
+					yFieldPText = "0";
+					zFieldPText = "0";
+					xFieldVText = "0";
+					yFieldVText = "0";
+					zFieldVText = "0";
+					xFieldMText = "5";
+					yFieldPText = "150";
+					zFieldPText = "150";
+					xFieldVText = "20";
+					yFieldVText = "20";
+					}
+				else if(presetsCombo.getSelectedIndex()==1){
+					xFieldEText = "0";
+					yFieldEText = "0";
+					zFieldEText = "0";
+					xFieldMText = "0";
+					yFieldMText = "0";
+					zFieldMText = "0";
+					xFieldPText = "0";
+					yFieldPText = "0";
+					zFieldPText = "0";
+					xFieldVText = "0";
+					yFieldVText = "0";
+					zFieldVText = "0";
+					yFieldMText = "1";
+					xFieldPText = "150";
+					yFieldPText = "150";
+					zFieldPText = "80";
+					xFieldVText = "80";
+				}
+				
+				xFieldE.setText(xFieldEText);
+				yFieldE.setText(yFieldEText);
+				zFieldE.setText(zFieldEText);
+				xFieldM.setText(xFieldMText);
+				yFieldM.setText(yFieldMText);
+				zFieldM.setText(zFieldMText);
+				xFieldP.setText(xFieldPText);
+				yFieldP.setText(yFieldPText);
+				zFieldP.setText(zFieldPText);
+				xFieldV.setText(xFieldVText);
+				yFieldV.setText(yFieldVText);
+				zFieldV.setText(zFieldVText);
+				chargeField.setText(chargeFieldText);
+				massField.setText(massFieldText);
+			}}
+		PresetsListener presetsListener = new PresetsListener();
+		presetsCombo.addActionListener(presetsListener);
 	}
 	
 }
