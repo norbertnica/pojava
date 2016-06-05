@@ -9,12 +9,15 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.Action;
+import javax.swing.BorderFactory;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.EtchedBorder;
 
 import pojava.Frame.StopButtonListener;
 public class ToolPanel extends JPanel {
@@ -35,6 +38,22 @@ public class ToolPanel extends JPanel {
 	public JTextField massField;
 	public Frame globalFrame;
 	public JComboBox presetsCombo;
+	public JLabel fieldsLabel;
+	public JLabel electricLabel;
+	public JLabel magneticLabel;
+	public JLabel particleLabel;
+	public JLabel chargeLabel;
+	public JLabel massLabel;
+	public JLabel velocityLabel;
+	public JLabel positionLabel;
+	public JLabel timeFields;
+	public JLabel presets;
+	public JButton runButton;
+	public JButton stopButton;
+	public JButton clearButton;
+	String[] presetChoicesEnglish = {"Helical motion","Circular motion"};
+	String[] presetChoicesPolish = {"Ruch po spirali","Ruch po okręgu"};
+	
 	public ToolPanel(Frame frame, StopButtonListener x) {
 		// TODO Auto-generated constructor stub
 		
@@ -42,18 +61,18 @@ public class ToolPanel extends JPanel {
 		GridBagLayout layout = new GridBagLayout();
 		GridBagConstraints c = new GridBagConstraints();
 		this.setLayout(layout);
-		JLabel fieldsLabel = new JLabel("Fields");
+		fieldsLabel = new JLabel("Fields");
 		c.gridx = 0;
 		c.gridy = 0;
 		c.gridwidth = 2;
 		c.anchor = GridBagConstraints.WEST;
 		c.fill = GridBagConstraints.HORIZONTAL;
 		add(fieldsLabel,c);
-		JLabel electricLabel = new JLabel("Electric field vector");
+		electricLabel = new JLabel("Electric field vector");
 		c.gridx = 0;
 		c.gridy = 1;
 		add(electricLabel,c);
-		JLabel magneticLabel = new JLabel("Magnetic field vector");
+		magneticLabel = new JLabel("Magnetic field vector");
 		c.gridx = 2;
 		c.gridy = 1;
 		add(magneticLabel,c);
@@ -98,32 +117,32 @@ public class ToolPanel extends JPanel {
 		add(yFieldM,c);
 		c.gridy = 4;
 		add(zFieldM,c);
-		JLabel particle = new JLabel("Particle");
-		JLabel charge = new JLabel("Charge");
-		JLabel mass = new JLabel("Mass");
+		particleLabel = new JLabel("Particle");
+		chargeLabel = new JLabel("Charge");
+		massLabel = new JLabel("Mass");
 		chargeField = new JTextField("",7);
 		massField = new JTextField("",7);
 		c.gridwidth = 2;
 		c.gridx = 0;
 		c.gridy = 5;
-		add(particle,c);
+		add(particleLabel,c);
 		c.gridwidth = 1;
 		c.gridy = 6;
-		add(charge,c);
+		add(chargeLabel,c);
 		c.gridx = 1;
 		add(chargeField,c);
 		c.gridx = 2;
-		add(mass,c);
+		add(massLabel,c);
 		c.gridx = 3;
 		add(massField,c);
-		JLabel position = new JLabel("Initial position vector");
-		JLabel velocity = new JLabel("Initial velocity vector");
+		positionLabel = new JLabel("Initial position vector");
+		velocityLabel = new JLabel("Initial velocity vector");
 		c.gridx = 0;
 		c.gridwidth = 2;
 		c.gridy = 7;
-		add(position,c);
+		add(positionLabel,c);
 		c.gridx = 2;
-		add(velocity,c);
+		add(velocityLabel,c);
 		JLabel xLabelP = new JLabel("x");
 		JLabel yLabelP = new JLabel("y");
 		JLabel zLabelP = new JLabel("z");
@@ -165,14 +184,13 @@ public class ToolPanel extends JPanel {
 		add(yFieldV,c);
 		c.gridy = 10;
 		add(zFieldV,c);
-		JButton runButton = new JButton("Run");
-		JButton stopButton = new JButton("Stop");
-		JButton clearButton = new JButton("Clear all");
-		JLabel timeFields = new JLabel("Time-varying fields");
-		JLabel presets = new JLabel("Presets");
-		String[] presetChoices = {"Helical motion","Circular motion"};
+		runButton = new JButton("Run");
+		stopButton = new JButton("Stop");
+		clearButton = new JButton("Clear all");
+		timeFields = new JLabel("Time-varying fields");
+		presets = new JLabel("Presets");
 		JComboBox timeCombo = new JComboBox();
-		presetsCombo = new JComboBox(presetChoices);
+		presetsCombo = new JComboBox(presetChoicesEnglish);
 		presetsCombo.setSelectedItem(null);
 		c.gridwidth = 2;
 		c.gridy = 11;
@@ -306,7 +324,28 @@ public class ToolPanel extends JPanel {
 					zFieldPText = "80";
 					xFieldVText = "80";
 				}
-				
+				else if(presetsCombo.getSelectedItem()==null)
+				{
+					xFieldEText = null;
+					yFieldEText = null;
+					zFieldEText = null;
+					xFieldMText = null;
+					yFieldMText = null;
+					zFieldMText = null;
+					xFieldPText = null;
+					yFieldPText = null;
+					zFieldPText = null;
+					xFieldVText = null;
+					yFieldVText = null;
+					zFieldVText = null;
+					yFieldMText = null;
+					xFieldPText = null;
+					yFieldPText = null;
+					zFieldPText = null;
+					xFieldVText = null;
+					chargeFieldText = null;
+					massFieldText = null;
+				}
 				xFieldE.setText(xFieldEText);
 				yFieldE.setText(yFieldEText);
 				zFieldE.setText(zFieldEText);
@@ -325,5 +364,44 @@ public class ToolPanel extends JPanel {
 		PresetsListener presetsListener = new PresetsListener();
 		presetsCombo.addActionListener(presetsListener);
 	}
-	
+	public void changeLanguageToPolish(){
+		fieldsLabel.setText("Pola");
+		electricLabel.setText("Wektor elektryczny");
+		magneticLabel.setText("Wektor mangetyczny");
+		chargeLabel.setText("Ładunek");
+		massLabel.setText("Masa");
+		particleLabel.setText("Cząstka");
+		positionLabel.setText("Położenie początkowe");
+		velocityLabel.setText("Prędkość początkowa");
+		runButton.setText("Start");
+		stopButton.setText("Stop");
+		clearButton.setText("Wyczyść");
+		presets.setText("Presety");
+		timeFields.setText("Pola zmienne w czasie");
+		DefaultComboBoxModel model = new DefaultComboBoxModel(presetChoicesPolish);
+		presetsCombo.setModel(model);
+		presetsCombo.setSelectedItem(null);
+		this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),"Parametry symulacji"));
+		
+		
+	}
+	public void changeLanguageToEnglish(){
+		fieldsLabel.setText("Fields");
+		electricLabel.setText("Electric field vector");
+		magneticLabel.setText("Magnetic field vector");
+		chargeLabel.setText("Charge");
+		massLabel.setText("Mass");
+		particleLabel.setText("Particle");
+		positionLabel.setText("Initial position vector");
+		velocityLabel.setText("Initial velocity vector");
+		runButton.setText("Run");
+		stopButton.setText("Stop");
+		clearButton.setText("Clear all");
+		presets.setText("Presets");
+		timeFields.setText("Time-varying fields");
+		DefaultComboBoxModel model = new DefaultComboBoxModel(presetChoicesEnglish);
+		presetsCombo.setModel(model);
+		presetsCombo.setSelectedItem(null);
+		this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),"Simulation parameters"));
+	}
 }

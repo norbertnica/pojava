@@ -15,6 +15,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -29,6 +30,8 @@ public class Frame extends JFrame {
 	public JPanel animationPanelzx;
 	public CalculationLoop calculationLoop;
 	public ExecutorService exec = Executors.newFixedThreadPool(1);
+	public String language = "eng";
+	ToolPanel toolPanel;
 	class StopButtonListener implements ActionListener{
 
 		@Override
@@ -46,8 +49,8 @@ public class Frame extends JFrame {
 	public Frame() throws HeadlessException {
 		// TODO Auto-generated constructor stub
 		//Molecule molecule = new Molecule();
-		setTitle("Kleszcze simulation");
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setTitle("Cząstka w polu elektrycznym i magnetycznym - Kleszcze");
+		setDefaultCloseOperation(EXIT_ON_CLOSE);;
 		GridBagLayout layout = new GridBagLayout();
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;
@@ -70,11 +73,40 @@ public class Frame extends JFrame {
 		animationPanelyx = animation1;
 		animationPanelzx = animation2;
 		StopButtonListener stopButtonListener = new StopButtonListener();
-		ToolPanel toolPanel = new ToolPanel(this, stopButtonListener);
+		toolPanel = new ToolPanel(this, stopButtonListener);
 		
 		toolPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),"Simulation parameters"));
 		pane.add(toolPanel,c);
+		JButton languageButton = new JButton("language");
+		pane.add(languageButton);
+		
+		class languageButtonListener implements ActionListener{
+
+			ToolPanel toolPanel;
+			Frame frame;
+			public languageButtonListener(ToolPanel toolPanel,Frame frame) {
+				// TODO Auto-generated constructor stub
+				this.toolPanel = toolPanel;
+				this.frame = frame;
+			}
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				if(language == "eng"){
+				toolPanel.changeLanguageToPolish();
+				frame.changeLanguageToPolish();
+				language = "pl";
+				
+				
+				}
+				else if(language == "pl"){
+					toolPanel.changeLanguageToEnglish();
+					frame.changeLanguageToEnglish();
+					language = "eng";
+				}
+			}}
 	
+		languageButton.addActionListener(new languageButtonListener(toolPanel,this));
 		
 		
 		
@@ -103,8 +135,18 @@ public class Frame extends JFrame {
 			}
 			
 		});
+		
 	}
-	
+		public void changeLanguageToPolish(){
+			this.setTitle("Cząstka w polu elektrycznym i magnetycznym - Kleszcze");
+			animationPanelyx.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),"Animacja w płaszczyźnie XY"));
+			animationPanelzx.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),"Animacja w płaszczyźnie XZ"));
+		}
+		public void changeLanguageToEnglish(){
+			this.setTitle("Particle in electric and magnetic fields - Kleszcze");
+			animationPanelyx.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),"XY plane animation"));
+			animationPanelzx.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),"ZY plane animation"));
+		}
 		
 	}
 
