@@ -7,14 +7,20 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.HeadlessException;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URL;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -32,6 +38,7 @@ public class Frame extends JFrame {
 	public ExecutorService exec = Executors.newFixedThreadPool(1);
 	public String language = "eng";
 	ToolPanel toolPanel;
+	JButton languageButton;
 	class StopButtonListener implements ActionListener{
 
 		@Override
@@ -49,7 +56,7 @@ public class Frame extends JFrame {
 	public Frame() throws HeadlessException {
 		// TODO Auto-generated constructor stub
 		//Molecule molecule = new Molecule();
-		setTitle("Cząstka w polu elektrycznym i magnetycznym - Kleszcze");
+		setTitle("Particle in electric and mangetic fields - Kleszcze");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);;
 		GridBagLayout layout = new GridBagLayout();
 		GridBagConstraints c = new GridBagConstraints();
@@ -77,7 +84,11 @@ public class Frame extends JFrame {
 		
 		toolPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),"Simulation parameters"));
 		pane.add(toolPanel,c);
-		JButton languageButton = new JButton("language");
+		URL url = getClass().getResource("/images/polish.jpg");
+		languageButton = new JButton(new ImageIcon(url));
+		
+		
+		
 		pane.add(languageButton);
 		
 		class languageButtonListener implements ActionListener{
@@ -96,6 +107,8 @@ public class Frame extends JFrame {
 				toolPanel.changeLanguageToPolish();
 				frame.changeLanguageToPolish();
 				language = "pl";
+				URL url = getClass().getResource("/images/british-flag.png");
+				languageButton.setIcon(new ImageIcon(url));
 				
 				
 				}
@@ -103,6 +116,8 @@ public class Frame extends JFrame {
 					toolPanel.changeLanguageToEnglish();
 					frame.changeLanguageToEnglish();
 					language = "eng";
+					URL url = getClass().getResource("/images/polish.jpg");
+					languageButton.setIcon(new ImageIcon(url));
 				}
 			}}
 	
