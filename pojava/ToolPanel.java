@@ -2,251 +2,251 @@ package pojava;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
-
-import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
 
 import pojava.Frame.StopButtonListener;
+
 public class ToolPanel extends JPanel {
-	
-	public JTextField xFieldE;
-	public JTextField yFieldE;
-	public JTextField zFieldE;
-	public JTextField xFieldM;
-	public JTextField yFieldM;
-	public JTextField zFieldM;
-	public JTextField xFieldP;
-	public JTextField yFieldP;
-	public JTextField zFieldP;
-	public JTextField xFieldV;
-	public JTextField yFieldV;
-	public JTextField zFieldV;
-	public JTextField chargeField;
-	public JTextField massField;
-	public Frame globalFrame;
-	public JComboBox presetsCombo;
-	public JLabel fieldsLabel;
-	public JLabel electricLabel;
-	public JLabel magneticLabel;
-	public JLabel particleLabel;
-	public JLabel chargeLabel;
-	public JLabel massLabel;
-	public JLabel velocityLabel;
-	public JLabel positionLabel;
-	public JLabel timeFields;
-	public JLabel presets;
-	public JButton runButton;
-	public JButton stopButton;
-	public JButton clearButton;
-	String[] presetChoicesEnglish = {"Helical motion","Circular motion"};
-	String[] presetChoicesPolish = {"Ruch po spirali","Ruch po okręgu"};
-	
+
+	private static final long serialVersionUID = -2010947848192211386L;
+	private JTextField xFieldE;
+	private JTextField yFieldE;
+	private JTextField zFieldE;
+	private JTextField xFieldM;
+	private JTextField yFieldM;
+	private JTextField zFieldM;
+	private JTextField xFieldP;
+	private JTextField yFieldP;
+	private JTextField zFieldP;
+	private JTextField xFieldV;
+	private JTextField yFieldV;
+	private JTextField zFieldV;
+	private JTextField chargeField;
+	private JTextField massField;
+	private Frame globalFrame;
+	private JComboBox<String> presetsCombo;
+	private JLabel fieldsLabel;
+	private JLabel electricLabel;
+	private JLabel magneticLabel;
+	private JLabel particleLabel;
+	private JLabel chargeLabel;
+	private JLabel massLabel;
+	private JLabel velocityLabel;
+	private JLabel positionLabel;
+	private JLabel presets;
+	private JButton runButton;
+	private JButton stopButton;
+	private JButton clearButton;
+	private String[] presetChoicesEnglish = { "Helical motion", "Circular motion" };
+	private String[] presetChoicesPolish = { "Ruch po spirali", "Ruch po okręgu" };
+
 	public ToolPanel(Frame frame, StopButtonListener x) {
-		// TODO Auto-generated constructor stub
-		
+
 		globalFrame = frame;
 		GridBagLayout layout = new GridBagLayout();
-		GridBagConstraints c = new GridBagConstraints();
+		GridBagConstraints constraints = new GridBagConstraints();
 		this.setLayout(layout);
 		fieldsLabel = new JLabel("Fields");
-		c.gridx = 0;
-		c.gridy = 0;
-		c.gridwidth = 2;
-		c.anchor = GridBagConstraints.WEST;
-		c.fill = GridBagConstraints.HORIZONTAL;
-		add(fieldsLabel,c);
 		electricLabel = new JLabel("Electric field vector");
-		c.gridx = 0;
-		c.gridy = 1;
-		add(electricLabel,c);
 		magneticLabel = new JLabel("Magnetic field vector");
-		c.gridx = 2;
-		c.gridy = 1;
-		add(magneticLabel,c);
-		JLabel xLabelE = new JLabel("x");
-		JLabel yLabelE = new JLabel("y");
-		JLabel zLabelE = new JLabel("z");
-		xFieldE = new JTextField("",7);
-		yFieldE = new JTextField("",7);
-		zFieldE = new JTextField("",7);
-		c.gridwidth = 1;
-		c.gridx = 0;
-		c.gridy = 2;
-		add(xLabelE,c);
-		c.gridy = 3;
-		add(yLabelE,c);
-		c.gridy = 4;
-		add(zLabelE,c);
-		c.gridx = 1;
-		c.gridy = 2;
-		add(xFieldE,c);
-		c.gridy = 3;
-		add(yFieldE,c);
-		c.gridy = 4;
-		add(zFieldE,c);
-		JLabel xLabelM = new JLabel("x");
-		JLabel yLabelM = new JLabel("y");
-		JLabel zLabelM = new JLabel("z");
-		xFieldM = new JTextField("",7);
-		yFieldM = new JTextField("",7);
-		zFieldM = new JTextField("",7);
-		c.gridx = 2;
-		c.gridy= 2;
-		add(xLabelM,c);
-		c.gridy = 3;
-		add(yLabelM,c);
-		c.gridy = 4;
-		add(zLabelM,c);
-		c.gridx = 3;
-		c.gridy = 2;
-		add(xFieldM,c);
-		c.gridy = 3;
-		add(yFieldM,c);
-		c.gridy = 4;
-		add(zFieldM,c);
 		particleLabel = new JLabel("Particle");
 		chargeLabel = new JLabel("Charge");
 		massLabel = new JLabel("Mass");
-		chargeField = new JTextField("",7);
-		massField = new JTextField("",7);
-		c.gridwidth = 2;
-		c.gridx = 0;
-		c.gridy = 5;
-		add(particleLabel,c);
-		c.gridwidth = 1;
-		c.gridy = 6;
-		add(chargeLabel,c);
-		c.gridx = 1;
-		add(chargeField,c);
-		c.gridx = 2;
-		add(massLabel,c);
-		c.gridx = 3;
-		add(massField,c);
 		positionLabel = new JLabel("Initial position vector");
 		velocityLabel = new JLabel("Initial velocity vector");
-		c.gridx = 0;
-		c.gridwidth = 2;
-		c.gridy = 7;
-		add(positionLabel,c);
-		c.gridx = 2;
-		add(velocityLabel,c);
+		JLabel xLabelE = new JLabel("x");
+		JLabel yLabelE = new JLabel("y");
+		JLabel zLabelE = new JLabel("z");
 		JLabel xLabelP = new JLabel("x");
 		JLabel yLabelP = new JLabel("y");
 		JLabel zLabelP = new JLabel("z");
-		c.gridx = 0;
-		c.gridy = 8;
-		c.gridwidth = 1;
-		add(xLabelP,c);
-		c.gridy = 9;
-		add(yLabelP,c);
-		c.gridy = 10;
-		add(zLabelP,c);
-		xFieldP = new JTextField();
-		yFieldP = new JTextField();
-		zFieldP = new JTextField();
-		c.gridx = 1;
-		c.gridy = 8;
-		add(xFieldP,c);
-		c.gridy = 9;
-		add(yFieldP,c);
-		c.gridy = 10;
-		add(zFieldP,c);
+		JLabel xLabelM = new JLabel("x");
+		JLabel yLabelM = new JLabel("y");
+		JLabel zLabelM = new JLabel("z");
 		JLabel xLabelV = new JLabel("x");
 		JLabel yLabelV = new JLabel("y");
 		JLabel zLabelV = new JLabel("z");
-		xFieldV = new JTextField();
-		yFieldV = new JTextField();
-		zFieldV = new JTextField();
-		c.gridx = 2;
-		c.gridy = 8;
-		add(xLabelV,c);
-		c.gridy = 9;
-		add(yLabelV,c);
-		c.gridy = 10;
-		add(zLabelV,c);
-		c.gridx = 3;
-		c.gridy = 8;
-		add(xFieldV,c);
-		c.gridy = 9;
-		add(yFieldV,c);
-		c.gridy = 10;
-		add(zFieldV,c);
+		chargeField = new JTextField("", 7);
+		massField = new JTextField("", 7);
+		xFieldE = new JTextField("", 7);
+		yFieldE = new JTextField("", 7);
+		zFieldE = new JTextField("", 7);
+		xFieldM = new JTextField("", 7);
+		yFieldM = new JTextField("", 7);
+		zFieldM = new JTextField("", 7);
+		xFieldP = new JTextField("", 7);
+		yFieldP = new JTextField("", 7);
+		zFieldP = new JTextField("", 7);
+		xFieldV = new JTextField("", 7);
+		yFieldV = new JTextField("", 7);
+		zFieldV = new JTextField("", 7);
 		runButton = new JButton("Run");
 		stopButton = new JButton("Stop");
 		clearButton = new JButton("Clear all");
-		timeFields = new JLabel("Time-varying fields");
 		presets = new JLabel("Presets");
-		JComboBox timeCombo = new JComboBox();
-		presetsCombo = new JComboBox(presetChoicesEnglish);
+		presetsCombo = new JComboBox<String>(presetChoicesEnglish);
 		presetsCombo.setSelectedItem(null);
-		c.gridwidth = 2;
-		c.gridy = 11;
-		c.gridx = 0;
-		add(timeFields,c);
-		c.gridx = 2;
-		add(presets,c);
-		c.gridx = 0;
-		c.gridy = 12;
-		add(timeCombo,c);
-		c.gridx = 2;
-		add(presetsCombo,c);
-		c.gridwidth = 1;
-		c.gridx = 0;
-		c.gridy = 13;
-		add(runButton,c);
-		c.gridx = 1;
-		add(stopButton,c);
-		c.gridx = 2;
-		add(clearButton,c);
-		
-		
-		class RunButtonListener implements ActionListener{
+		constraints.gridx = 0;
+		constraints.gridy = 0;
+		constraints.gridwidth = 2;
+		constraints.anchor = GridBagConstraints.CENTER;
+		constraints.fill = GridBagConstraints.HORIZONTAL;
+		add(fieldsLabel, constraints);
+		constraints.gridx = 0;
+		constraints.gridy = 1;
+		add(electricLabel, constraints);
+		constraints.gridx = 2;
+		constraints.gridy = 1;
+		add(magneticLabel, constraints);
+		constraints.gridwidth = 1;
+		constraints.gridx = 0;
+		constraints.gridy = 2;
+		add(xLabelE, constraints);
+		constraints.gridy = 3;
+		add(yLabelE, constraints);
+		constraints.gridy = 4;
+		add(zLabelE, constraints);
+		constraints.gridx = 1;
+		constraints.gridy = 2;
+		add(xFieldE, constraints);
+		constraints.gridy = 3;
+		add(yFieldE, constraints);
+		constraints.gridy = 4;
+		add(zFieldE, constraints);
+		constraints.gridx = 2;
+		constraints.gridy = 2;
+		add(xLabelM, constraints);
+		constraints.gridy = 3;
+		add(yLabelM, constraints);
+		constraints.gridy = 4;
+		add(zLabelM, constraints);
+		constraints.gridx = 3;
+		constraints.gridy = 2;
+		add(xFieldM, constraints);
+		constraints.gridy = 3;
+		add(yFieldM, constraints);
+		constraints.gridy = 4;
+		add(zFieldM, constraints);
+		constraints.gridwidth = 2;
+		constraints.gridx = 0;
+		constraints.gridy = 5;
+		add(particleLabel, constraints);
+		constraints.gridwidth = 1;
+		constraints.gridy = 6;
+		add(chargeLabel, constraints);
+		constraints.gridx = 1;
+		add(chargeField, constraints);
+		constraints.gridx = 2;
+		add(massLabel, constraints);
+		constraints.gridx = 3;
+		add(massField, constraints);
+		constraints.gridx = 0;
+		constraints.gridwidth = 2;
+		constraints.gridy = 7;
+		add(positionLabel, constraints);
+		constraints.gridx = 2;
+		add(velocityLabel, constraints);
+		constraints.gridx = 0;
+		constraints.gridy = 8;
+		constraints.gridwidth = 1;
+		add(xLabelP, constraints);
+		constraints.gridy = 9;
+		add(yLabelP, constraints);
+		constraints.gridy = 10;
+		add(zLabelP, constraints);
+		constraints.gridx = 1;
+		constraints.gridy = 8;
+		add(xFieldP, constraints);
+		constraints.gridy = 9;
+		add(yFieldP, constraints);
+		constraints.gridy = 10;
+		add(zFieldP, constraints);
+		constraints.gridx = 2;
+		constraints.gridy = 8;
+		add(xLabelV, constraints);
+		constraints.gridy = 9;
+		add(yLabelV, constraints);
+		constraints.gridy = 10;
+		add(zLabelV, constraints);
+		constraints.gridx = 3;
+		constraints.gridy = 8;
+		add(xFieldV, constraints);
+		constraints.gridy = 9;
+		add(yFieldV, constraints);
+		constraints.gridy = 10;
+		add(zFieldV, constraints);
+		constraints.gridwidth = 2;
+		constraints.gridy = 11;
+		constraints.gridx = 0;
+		constraints.gridx = 2;
+		add(presets, constraints);
+		constraints.gridx = 0;
+		constraints.gridy = 12;
+		constraints.gridx = 2;
+		add(presetsCombo, constraints);
+		constraints.gridwidth = 1;
+		constraints.gridx = 0;
+		constraints.gridy = 13;
+		add(runButton, constraints);
+		constraints.gridx = 1;
+		add(stopButton, constraints);
+		constraints.gridx = 2;
+		add(clearButton, constraints);
+
+		class RunButtonListener implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+
+				if (massField.getText().equals("") || chargeField.getText().equals("") || xFieldE.getText().equals("")
+						|| yFieldE.getText().equals("") || zFieldE.getText().equals("") || xFieldM.getText().equals("")
+						|| yFieldM.getText().equals("") || zFieldM.getText().equals("") || xFieldP.getText().equals("")
+						|| yFieldP.getText().equals("") || zFieldP.getText().equals("") || xFieldV.getText().equals("")
+						|| yFieldV.getText().equals("") || zFieldV.getText().equals("")) {
+					globalFrame.showDialogForBlankFields();
+				}
 				
-				 Molecule molecule = new Molecule();
-				 molecule.setElectricFieldX(Float.parseFloat(xFieldE.getText()));
-				 molecule.setElectricFieldY(Float.parseFloat(yFieldE.getText()));
-				 molecule.setElectricFieldZ(Float.parseFloat(zFieldE.getText()));
-				 molecule.setMagneticFieldX(Float.parseFloat(xFieldM.getText()));
-				 molecule.setMagneticFieldY(Float.parseFloat(yFieldM.getText()));
-				 molecule.setMagneticFieldZ( Float.parseFloat(zFieldM.getText()));
-				 molecule.setX(Double.parseDouble(xFieldP.getText()));
-				 molecule.setY(Double.parseDouble(yFieldP.getText()));
-				 molecule.setZ(Double.parseDouble(zFieldP.getText()));
-				 molecule.SetSpeedX(Float.parseFloat(xFieldV.getText()));
-				 molecule.SetSpeedY(Float.parseFloat(yFieldV.getText()));
-				 molecule.SetSpeedZ(Float.parseFloat(zFieldV.getText()));
-				 molecule.setMass(Float.parseFloat(massField.getText()));
-				 molecule.setCharge(Float.parseFloat(chargeField.getText()));
-				 globalFrame.startAnimation(molecule);
+				else if (massField.getText().equals("0") || chargeField.getText().equals("0")) {
+					globalFrame.showDialogForMassAndCharge();
+				} 
+				else {
+					Particle particle = new Particle();
+					particle.setElectricFieldX(Float.parseFloat(xFieldE.getText()));
+					particle.setElectricFieldY(Float.parseFloat(yFieldE.getText()));
+					particle.setElectricFieldZ(Float.parseFloat(zFieldE.getText()));
+					particle.setMagneticFieldX(Float.parseFloat(xFieldM.getText()));
+					particle.setMagneticFieldY(Float.parseFloat(yFieldM.getText()));
+					particle.setMagneticFieldZ(Float.parseFloat(zFieldM.getText()));
+					particle.setPositionX(Float.parseFloat(xFieldP.getText()));
+					particle.setPositionY(Float.parseFloat(yFieldP.getText()));
+					particle.setPositionZ(Float.parseFloat(zFieldP.getText()));
+					particle.setSpeedX(Float.parseFloat(xFieldV.getText()));
+					particle.setSpeedY(Float.parseFloat(yFieldV.getText()));
+					particle.setSpeedZ(Float.parseFloat(zFieldV.getText()));
+					particle.setMass(Float.parseFloat(massField.getText()));
+					particle.setCharge(Float.parseFloat(chargeField.getText()));
+					globalFrame.startAnimation(particle);
+				}
 			}
-			
+
 		}
 		RunButtonListener runButtonListener = new RunButtonListener();
 		runButton.addActionListener(runButtonListener);
 		stopButton.addActionListener(x);
-		class ClearButtonListener implements ActionListener{
+		class ClearButtonListener implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
+
 				xFieldE.setText(null);
 				yFieldE.setText(null);
 				zFieldE.setText(null);
@@ -261,17 +261,17 @@ public class ToolPanel extends JPanel {
 				zFieldV.setText(null);
 				chargeField.setText(null);
 				massField.setText(null);
-				
+
 			}
 		}
 		ClearButtonListener clearButtonListener = new ClearButtonListener();
 		clearButton.addActionListener(clearButtonListener);
-		
-		class PresetsListener implements ActionListener{
+
+		class PresetsListener implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
+				
 				String xFieldEText = "0";
 				String yFieldEText = "0";
 				String zFieldEText = "0";
@@ -286,7 +286,7 @@ public class ToolPanel extends JPanel {
 				String zFieldVText = "0";
 				String chargeFieldText = "1";
 				String massFieldText = "1";
-				if(presetsCombo.getSelectedIndex()==0){
+				if (presetsCombo.getSelectedIndex() == 0) {
 					xFieldEText = "0";
 					yFieldEText = "0";
 					zFieldEText = "0";
@@ -304,8 +304,9 @@ public class ToolPanel extends JPanel {
 					zFieldPText = "150";
 					xFieldVText = "20";
 					yFieldVText = "20";
-					}
-				else if(presetsCombo.getSelectedIndex()==1){
+				} 
+				
+				else if (presetsCombo.getSelectedIndex() == 1) {
 					xFieldEText = "0";
 					yFieldEText = "0";
 					zFieldEText = "0";
@@ -323,9 +324,9 @@ public class ToolPanel extends JPanel {
 					yFieldPText = "150";
 					zFieldPText = "80";
 					xFieldVText = "80";
-				}
-				else if(presetsCombo.getSelectedItem()==null)
-				{
+				} 
+				
+				else if (presetsCombo.getSelectedItem() == null) {
 					xFieldEText = null;
 					yFieldEText = null;
 					zFieldEText = null;
@@ -346,6 +347,7 @@ public class ToolPanel extends JPanel {
 					chargeFieldText = null;
 					massFieldText = null;
 				}
+				
 				xFieldE.setText(xFieldEText);
 				yFieldE.setText(yFieldEText);
 				zFieldE.setText(zFieldEText);
@@ -360,11 +362,13 @@ public class ToolPanel extends JPanel {
 				zFieldV.setText(zFieldVText);
 				chargeField.setText(chargeFieldText);
 				massField.setText(massFieldText);
-			}}
+			}
+		}
 		PresetsListener presetsListener = new PresetsListener();
 		presetsCombo.addActionListener(presetsListener);
 	}
-	public void changeLanguageToPolish(){
+
+	public void changeLanguageToPolish() {
 		fieldsLabel.setText("Pola");
 		electricLabel.setText("Wektor elektryczny");
 		magneticLabel.setText("Wektor mangetyczny");
@@ -377,15 +381,15 @@ public class ToolPanel extends JPanel {
 		stopButton.setText("Stop");
 		clearButton.setText("Wyczyść");
 		presets.setText("Presety");
-		timeFields.setText("Pola zmienne w czasie");
-		DefaultComboBoxModel model = new DefaultComboBoxModel(presetChoicesPolish);
+		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(presetChoicesPolish);
 		presetsCombo.setModel(model);
 		presetsCombo.setSelectedItem(null);
-		this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),"Parametry symulacji"));
-		
-		
+		this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),
+				"Parametry symulacji"));
+
 	}
-	public void changeLanguageToEnglish(){
+
+	public void changeLanguageToEnglish() {
 		fieldsLabel.setText("Fields");
 		electricLabel.setText("Electric field vector");
 		magneticLabel.setText("Magnetic field vector");
@@ -398,10 +402,11 @@ public class ToolPanel extends JPanel {
 		stopButton.setText("Stop");
 		clearButton.setText("Clear all");
 		presets.setText("Presets");
-		timeFields.setText("Time-varying fields");
-		DefaultComboBoxModel model = new DefaultComboBoxModel(presetChoicesEnglish);
+		DefaultComboBoxModel<String> model = new DefaultComboBoxModel<String>(presetChoicesEnglish);
 		presetsCombo.setModel(model);
 		presetsCombo.setSelectedItem(null);
-		this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),"Simulation parameters"));
+		this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),
+				"Simulation parameters"));
 	}
+
 }

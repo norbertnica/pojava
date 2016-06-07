@@ -8,7 +8,6 @@ public class MainInit {
 		mainFrame.pack();
 		mainFrame.setVisible(true);
 		
-		
 	}
 
 }
