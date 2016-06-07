@@ -38,6 +38,7 @@ public class Frame extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 
 			calculationLoop.stopAnimation();
+			toolPanel.enableRunButton();
 		}
 	}
 

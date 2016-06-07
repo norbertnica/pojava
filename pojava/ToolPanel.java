@@ -56,13 +56,13 @@ public class ToolPanel extends JPanel {
 		GridBagConstraints constraints = new GridBagConstraints();
 		this.setLayout(layout);
 		fieldsLabel = new JLabel("Fields");
-		electricLabel = new JLabel("Electric field vector");
-		magneticLabel = new JLabel("Magnetic field vector");
+		electricLabel = new JLabel("Electric field vector [N/C]");
+		magneticLabel = new JLabel("Magnetic field vector [T]");
 		particleLabel = new JLabel("Particle");
-		chargeLabel = new JLabel("Charge");
-		massLabel = new JLabel("Mass");
-		positionLabel = new JLabel("Initial position vector");
-		velocityLabel = new JLabel("Initial velocity vector");
+		chargeLabel = new JLabel("Charge [C]");
+		massLabel = new JLabel("Mass [kg]");
+		positionLabel = new JLabel("Initial position vector [m]");
+		velocityLabel = new JLabel("Initial velocity vector [m/s]");
 		JLabel xLabelE = new JLabel("x");
 		JLabel yLabelE = new JLabel("y");
 		JLabel zLabelE = new JLabel("z");
@@ -91,6 +91,7 @@ public class ToolPanel extends JPanel {
 		zFieldV = new JTextField("", 7);
 		runButton = new JButton("Run");
 		stopButton = new JButton("Stop");
+		stopButton.setEnabled(false);
 		clearButton = new JButton("Clear all");
 		presets = new JLabel("Presets");
 		presetsCombo = new JComboBox<String>(presetChoicesEnglish);
@@ -235,6 +236,7 @@ public class ToolPanel extends JPanel {
 					particle.setMass(Float.parseFloat(massField.getText()));
 					particle.setCharge(Float.parseFloat(chargeField.getText()));
 					globalFrame.startAnimation(particle);
+					disableRunButton();
 				}
 			}
 
@@ -370,13 +372,13 @@ public class ToolPanel extends JPanel {
 
 	public void changeLanguageToPolish() {
 		fieldsLabel.setText("Pola");
-		electricLabel.setText("Wektor elektryczny");
-		magneticLabel.setText("Wektor mangetyczny");
-		chargeLabel.setText("Ładunek");
-		massLabel.setText("Masa");
+		electricLabel.setText("Wektor elektryczny [N/C]");
+		magneticLabel.setText("Wektor mangetyczny [T]");
+		chargeLabel.setText("Ładunek [C]");
+		massLabel.setText("Masa [kg]");
 		particleLabel.setText("Cząstka");
-		positionLabel.setText("Położenie początkowe");
-		velocityLabel.setText("Prędkość początkowa");
+		positionLabel.setText("Położenie początkowe [m]");
+		velocityLabel.setText("Prędkość początkowa [m/s]");
 		runButton.setText("Start");
 		stopButton.setText("Stop");
 		clearButton.setText("Wyczyść");
@@ -391,13 +393,13 @@ public class ToolPanel extends JPanel {
 
 	public void changeLanguageToEnglish() {
 		fieldsLabel.setText("Fields");
-		electricLabel.setText("Electric field vector");
-		magneticLabel.setText("Magnetic field vector");
-		chargeLabel.setText("Charge");
-		massLabel.setText("Mass");
+		electricLabel.setText("Electric field vector [N/C]");
+		magneticLabel.setText("Magnetic field vector [T]");
+		chargeLabel.setText("Charge [C]");
+		massLabel.setText("Mass [kg]");
 		particleLabel.setText("Particle");
-		positionLabel.setText("Initial position vector");
-		velocityLabel.setText("Initial velocity vector");
+		positionLabel.setText("Initial position vector [m]");
+		velocityLabel.setText("Initial velocity vector [m/s]");
 		runButton.setText("Run");
 		stopButton.setText("Stop");
 		clearButton.setText("Clear all");
@@ -408,5 +410,13 @@ public class ToolPanel extends JPanel {
 		this.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED),
 				"Simulation parameters"));
 	}
-
+	public void disableRunButton(){
+		runButton.setEnabled(false);
+		stopButton.setEnabled(true);
+	}
+	public void enableRunButton(){
+		runButton.setEnabled(true);
+		stopButton.setEnabled(false);
+	}
+	
 }

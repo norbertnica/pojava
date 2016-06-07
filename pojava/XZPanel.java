@@ -31,8 +31,12 @@ public class XZPanel extends JPanel {
 		g.fillPolygon(new int[] { 290, 290, 300 }, new int[] { 290, 280, 285 }, 3);
 		g.drawLine(15, 10, 15, 300);
 		g.fillPolygon(new int[] { 10, 15, 20 }, new int[] { 10, 0, 10 }, 3);
+		
+		g.drawString("x[m]", 260, 299);
+		g.drawString("y", 2, 11);
+		g.drawString("[m]", 0, 22);
 
-		for (int i = 65; i < 271; i += 50) {
+		for (int i = 65; i < 260; i += 50) {
 			int number = i - 15;
 			g.drawLine(i, 282, i, 288);
 			String s = Integer.toString(number);
