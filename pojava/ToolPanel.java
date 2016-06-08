@@ -55,14 +55,14 @@ public class ToolPanel extends JPanel {
 		GridBagLayout layout = new GridBagLayout();
 		GridBagConstraints constraints = new GridBagConstraints();
 		this.setLayout(layout);
-		fieldsLabel = new JLabel("Fields");
-		electricLabel = new JLabel("Electric field vector [N/C]");
-		magneticLabel = new JLabel("Magnetic field vector [T]");
-		particleLabel = new JLabel("Particle");
-		chargeLabel = new JLabel("Charge [C]");
-		massLabel = new JLabel("Mass [kg]");
-		positionLabel = new JLabel("Initial position vector [m]");
-		velocityLabel = new JLabel("Initial velocity vector [m/s]");
+		fieldsLabel = new JLabel();
+		electricLabel = new JLabel();
+		magneticLabel = new JLabel();
+		particleLabel = new JLabel();
+		chargeLabel = new JLabel();
+		massLabel = new JLabel();
+		positionLabel = new JLabel();
+		velocityLabel = new JLabel();
 		JLabel xLabelE = new JLabel("x");
 		JLabel yLabelE = new JLabel("y");
 		JLabel zLabelE = new JLabel("z");
@@ -89,13 +89,14 @@ public class ToolPanel extends JPanel {
 		xFieldV = new JTextField("", 7);
 		yFieldV = new JTextField("", 7);
 		zFieldV = new JTextField("", 7);
-		runButton = new JButton("Run");
-		stopButton = new JButton("Stop");
+		runButton = new JButton();
+		stopButton = new JButton();
 		stopButton.setEnabled(false);
-		clearButton = new JButton("Clear all");
-		presets = new JLabel("Presets");
+		clearButton = new JButton();
+		presets = new JLabel();
 		presetsCombo = new JComboBox<String>(presetChoicesEnglish);
 		presetsCombo.setSelectedItem(null);
+		setLanguageToEnglish();
 		constraints.gridx = 0;
 		constraints.gridy = 0;
 		constraints.gridwidth = 2;
@@ -370,10 +371,10 @@ public class ToolPanel extends JPanel {
 		presetsCombo.addActionListener(presetsListener);
 	}
 
-	public void changeLanguageToPolish() {
+	public void setLanguageToPolish() {
 		fieldsLabel.setText("Pola");
 		electricLabel.setText("Wektor elektryczny [N/C]");
-		magneticLabel.setText("Wektor mangetyczny [T]");
+		magneticLabel.setText("Wektor magnetyczny [T]");
 		chargeLabel.setText("Ładunek [C]");
 		massLabel.setText("Masa [kg]");
 		particleLabel.setText("Cząstka");
@@ -391,7 +392,7 @@ public class ToolPanel extends JPanel {
 
 	}
 
-	public void changeLanguageToEnglish() {
+	public void setLanguageToEnglish() {
 		fieldsLabel.setText("Fields");
 		electricLabel.setText("Electric field vector [N/C]");
 		magneticLabel.setText("Magnetic field vector [T]");

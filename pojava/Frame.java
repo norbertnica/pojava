@@ -98,8 +98,8 @@ public class Frame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 		
 				if (language == "eng") {
-					toolPanel.changeLanguageToPolish();
-					frame.changeLanguageToPolish();
+					toolPanel.setLanguageToPolish();
+					frame.setLanguageToPolish();
 					language = "pl";
 					URL url = getClass().getResource("/images/british-flag.png");
 					languageButton.setIcon(new ImageIcon(url));
@@ -109,8 +109,8 @@ public class Frame extends JFrame {
 
 				} 
 				else if (language == "pl") {
-					toolPanel.changeLanguageToEnglish();
-					frame.changeLanguageToEnglish();
+					toolPanel.setLanguageToEnglish();
+					frame.setLanguageToEnglish();
 					language = "eng";
 					URL url = getClass().getResource("/images/polish.jpg");
 					languageButton.setIcon(new ImageIcon(url));
@@ -162,7 +162,7 @@ public class Frame extends JFrame {
 
 	}
 
-	public void changeLanguageToPolish() {
+	public void setLanguageToPolish() {
 		this.setTitle("Cząstka w polu elektrycznym i magnetycznym - Kleszcze");
 		animationPanelyx.setBorder(BorderFactory.createTitledBorder(
 				BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "Animacja w płaszczyźnie XY"));
@@ -171,7 +171,7 @@ public class Frame extends JFrame {
 		creditsButton.setText("Autorzy");
 	}
 
-	public void changeLanguageToEnglish() {
+	public void setLanguageToEnglish() {
 		this.setTitle("Particle in electric and magnetic fields - Kleszcze");
 		animationPanelyx.setBorder(BorderFactory
 				.createTitledBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED), "XY plane animation"));
